@@ -1,7 +1,7 @@
 For each chapter in https://textbooks.cs.ksu.edu/cis301/:
 
 - If the current chapter contains at least one Logika proof/truth table (the first such chapter is Ch. 2):
-    - create a folder for the chapter under "src" in this repo under. Name the folder with the chapter number
+    - create a folder for the chapter in this repo. Name the folder with the chapter number
         and name (or abbreviation). For example: "ch2_truthTables".
 
 - Identify which sections in that chapter contain Logika proofs/truth tables (they tend to be multiple lines
