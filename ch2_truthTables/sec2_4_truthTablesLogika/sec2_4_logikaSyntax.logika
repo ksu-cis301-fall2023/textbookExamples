@@ -1,1 +1,27 @@
+An example of logically equivalent statements are q ∧ p and p ∧ (q ∧ p):
 
+         *
+--------------
+p q | (p ∧ q)
+--------------
+T T |  T T T
+T F |  T F F
+F T |  F F T
+F F |  F F F
+---------------
+Contingent
+- T : [T T]
+- F : [F F] [F T] [T F]
+
+         *
+-------------------
+p q |  p ∧ (q ∧ p)
+-------------------
+T T |  T T  T T T
+T F |  T F  F F T
+F T |  F F  T F F
+F F |  F F  F F F
+--------------------
+Contingent
+- T : [T T]
+- F : [F F] [F T] [T F]
