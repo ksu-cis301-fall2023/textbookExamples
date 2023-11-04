@@ -1,0 +1,31 @@
+//Two propositional logic statements S1 and S2 are provably equivalent if and only if we can prove both of the following sequents:
+
+//S1 ⊢ S2 and S2 ⊢ S1
+
+p → ¬ q ⊢ ¬ (p ∧ q)
+{
+    1. p → ¬ q              premise
+    2. {
+        3. p ∧ q            assume
+        4. p                ∧e1 3
+        5. q                ∧e2 3
+        6. ¬ q              →e 1 4
+        7. ⊥                ¬ e 5 6  
+    }
+    8. ¬ (p ∧ q)            ¬ i 2
+}
+
+¬ (p ∧ q) ⊢ p → ¬ q
+{
+    1. ¬ (p ∧ q)            premise
+    2. {
+        3. p                assume
+        4. {
+            5. q            assume
+            6. p ∧ q        ∧i 3 5
+            7. ⊥            ¬ e 6 1
+        }
+        8. ¬ q              ¬ i 4
+    }
+    9. p → ¬ q              →i 2
+}
