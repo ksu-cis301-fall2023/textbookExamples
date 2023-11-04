@@ -1,0 +1,27 @@
+//Suppose we wish to prove the following sequent:
+
+//∃ x (Adult(x) ∨ Kid(x)) ⊢ (∃ x Adult(x)) ∨ (∃ x Kid(x))
+
+∃ x (Adult(x) ∨ Kid(x)) ⊢ (∃ x Adult(x)) ∨ (∃ x Kid(x))
+{
+    1. ∃ x (Adult(x) ∨ Kid(x))                  premise
+    2. {
+        3. alice Adult(alice) ∨ Kid(alice)      assume
+        4. {
+            5. Adult(alice)                     assume
+            6. ∃ x Adult(x)                     ∃i 5 alice
+            7. (∃ x Adult(x)) ∨ (∃ x Kid(x))    ∨i1 6
+        }
+        8. {
+            9. Kid(alice)                       assume
+            10. ∃ x Kid(x)                      ∃i  9 alice
+            11. (∃ x Adult(x)) ∨ (∃ x Kid(x))   ∨i2 10
+        }
+        12. (∃ x Adult(x)) ∨ (∃ x Kid(x))       ∨e 3 4 8
+
+        //goal: get to our conclusion, (∃ x Adult(x)) ∨ (∃ x Kid(x))
+    }
+    //use ∃e to restate our conclusion, since we know SOME such person is either an adult or kid
+
+    13. (∃ x Adult(x)) ∨ (∃ x Kid(x))           ∃e 1 2
+}
