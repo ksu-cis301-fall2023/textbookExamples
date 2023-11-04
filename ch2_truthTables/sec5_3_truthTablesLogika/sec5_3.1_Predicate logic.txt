@@ -1,0 +1,40 @@
+Suppose we have some domain, and that P(x) is a predicate for individuals in that domain. DeMorgan’s laws give us the following equivalencies:
+
+¬(∃ x P(x)) is equivalent to ∀ x ¬P(x)
+¬(∀ x P(x)) is equivalent to ∃ x ¬P(x)
+
+Example: English to predicate logic
+Suppose our domain is people and that we have the following two predicates:
+
+K(x): whether person x is a kid
+M(x): whether person x likes marshmallows
+We will practice translating from English to predicate logic. Think about what the following sentences mean, and click to reveal each answer:
+
+No kids like marshmallows.
+Click here for solution
+¬(∃ x (K(x) ∧ M(x)), or equivalently, ∀ x (K(x) → ¬M(x))
+
+
+Not all kids like marshmallows.
+Click here for solution
+¬(∀ x (K(x) → M(x)), or equivalently, ∃ x (K(x) ∧ ¬M(x))
+
+
+Everyone who likes marshmallows is a kid.
+Click here for solution
+∀ x (M(x) → K(x))
+
+
+Some people who like marshmallows are not kids.
+Click here for solution
+∃ x (M(x) ∧ ¬K(x))
+
+
+Some kids don’t like marshmallows.
+Click here for solution
+∃ x (K(x) ∧ ¬M(x))
+
+
+Anyone who doesn’t like marshmallows is not a kid.
+Click here for solution
+∀ x (¬M(x) → ¬K(x))
