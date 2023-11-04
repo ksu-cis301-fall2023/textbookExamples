@@ -1,0 +1,29 @@
+//Suppose we wish to prove the following (in the domain of living things):
+
+//All bunnies are fluffy
+There is a fast bunny
+Therefore, there is a creature that is fast and fluffy
+We can translate our premises and desired conclusion to predicate logic, and write the following sequent://
+
+//∀ x (Bunny(x) → Fluffy(x)), ∃ x (Fast(x) ∧ Bunny(x)) ⊢ ∃ x (Fast(x) ∧ Fluffy(x))
+
+
+∀ x (Bunny(x) → Fluffy(x)), ∃ x (Fast(x) ∧ Bunny(x)) ⊢ ∃ x (Fast(x) ∧ Fluffy(x))
+{
+    1. ∀ x (Bunny(x) → Fluffy(x))                   premise
+    2. ∃ x (Fast(x) ∧ Bunny(x))                     premise
+    3. {
+        4. thumper Fast(thumper) ∧ Bunny(thumper)   assume
+        5. Fast(thumper)                            ∧e1 4
+        6. Bunny(thumper)                           ∧e2 4
+        7. Bunny(thumper) → Fluffy(thumper)         ∀e 1 thumper
+        8. Fluffy(thumper)                          →e 7 6
+        9. Fast(thumper) ∧ Fluffy(thumper)          ∧i 5 8
+        10. ∃ x (Fast(x) ∧ Fluffy(x))               ∃i 9 thumper
+
+        //goal: ∃ x (Fast(x) ∧ Fluffy(x))
+    }
+    //use ∃e to restate ∃ x (Fast(x) ∧ Fluffy(x)), since we know there is SOME fast bunny
+
+    11. ∃ x (Fast(x) ∧ Fluffy(x))                   ∃e 2 3
+}
