@@ -1,0 +1,26 @@
+//Suppose we wish to prove the following sequent:
+
+//∀ x ∀ y P(x, y) ⊢ ∀ y ∀ x P(y, x)
+
+∀ x ∀ y P(x, y) ⊢ ∀ y ∀ x P(y, x)
+{
+    1. ∀ x ∀ y P(x, y)              premise
+    2. {
+        3. a 
+        4. {
+            5. b
+            6. ∀ y P(a, y)          ∀e 1 a
+            7. P(a, b)              ∀e 6 b
+
+            //need: P(a, b)
+        }
+        //want to use ∀i to conclude ∀ x P(a, x)
+
+        8. ∀ x P(a, x)              ∀i 4
+
+        //need: ∀ x P(a, x)
+    }
+    //want to use ∀i to conclude ∀ y ∀ x P(y, x)
+
+    9. ∀ y ∀ x P(y, x)              ∀i 2
+}
