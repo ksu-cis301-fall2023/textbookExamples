@@ -1,0 +1,29 @@
+Example: English to predicate logic
+Suppose our domain is people and that we have the following two predicates:
+
+K(x): whether person x is a kid
+M(x): whether person x likes marshmallows
+We will practice translating from English to predicate logic. Think about what the following sentences mean, and click to reveal each answer:
+
+No kids like marshmallows.
+¬(∃ x (K(x) ∧ M(x)), or equivalently, ∀ x (K(x) → ¬M(x))
+
+
+Not all kids like marshmallows.
+¬(∀ x (K(x) → M(x)), or equivalently, ∃ x (K(x) ∧ ¬M(x))
+
+
+Everyone who likes marshmallows is a kid.
+∀ x (M(x) → K(x))
+
+
+Some people who like marshmallows are not kids.
+∃ x (M(x) ∧ ¬K(x))
+
+
+Some kids don’t like marshmallows.
+∃ x (K(x) ∧ ¬M(x))
+
+
+Anyone who doesn’t like marshmallows is not a kid.
+∀ x (¬M(x) → ¬K(x))
