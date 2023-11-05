@@ -1,0 +1,14 @@
+import org.sireum.logika._
+
+//global variable
+var time: Z = 0
+
+def tick(): Z = {
+    l"""{
+        requires time > 0
+        modifies time
+        ensures time == time_in + 1
+    }"""
+
+    time = time + 1
+}
