@@ -1,0 +1,10 @@
+//Example 3: While loops
+//This program can’t be run the way it appears below, as Logika wants you to do some verification work first. However, this program demonstrates what a while loop will look like:
+
+import org.sireum.logika._
+
+var cur: Z = 10
+while (cur >= 1) {
+    println("Next number: ", cur)
+    cur = cur - 1
+}
