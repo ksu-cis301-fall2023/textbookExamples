@@ -1,0 +1,12 @@
+//Example 2: If/else statements
+//Here is a Logika program that gets a number from the user, and uses an if/else statement to print whether the number is positive or negative/zero:
+
+import org.sireum.logika._
+
+val num: Z = readInt("Enter a number: ")
+
+if (num > 0) {
+    println(num, " is positive")
+} else {
+    println(num, " is negative (or zero)")
+}
