@@ -1,0 +1,63 @@
+//Suppose we have a Logika program that finds finds the maximum (max) between two user input numbers (x and y):
+
+import org.sireum.logika._
+
+val x: Z = readInt()
+val y: Z = readInt()
+
+var max: Z = 0  //give max a dummy starting value
+
+if (x > y) {
+    max = x
+} else {
+    max = y
+}
+
+import org.sireum.logika._
+
+var x: Z = readInt()
+var y: Z = readInt()
+
+var max: Z = 0
+
+if (x > y) {
+    l"""{
+        2. x > y            premise     //the condition is true
+    }"""
+
+    max = x
+
+    l"""{
+        1. max == x         premise     //from the "max = x" assignment
+        2. max >= x         algebra 1
+        3. x > y            premise     //condition is still true (x and y are unchanged)
+        4. max >= y         algebra 1 3
+    }"""
+
+} else {
+    l"""{
+        2. ¬(x > y)         premise     //the condition is NOT true
+        3. x <= y           algebra 2
+    }"""
+
+    max = y
+    l"""{
+        1. max == y         premise     //from the "max = y" assignment
+        2. x <= y           premise     //pulled down from previous logic block (x and y are unchanged)
+        3. max >= x         algebra 1 2
+        4. max >= y         algebra 1
+    }"""
+}
+
+//summary of what just happened
+l"""{
+    //max == x in the IF, max == y in the ELSE
+    1. max == x ∨ max == y      premise
+
+    2. max >= x                 premise     //true in BOTH branches
+    3. max >= y                 premise     //true in BOTH branches
+    4. max >= x ∧ max >= y      ^i 2 3
+    5. (max >= x ∧ max >= y) ∧ (max == x ∨ max == y)    ^i 4 1
+}"""
+
+assert((max >= x & max >= y) & (max == x | max == y))
