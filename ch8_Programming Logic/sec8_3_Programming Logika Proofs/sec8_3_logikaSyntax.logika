@@ -1,0 +1,26 @@
+//Example: Consider the following program:
+
+import org.sireum.logika._
+
+val x: Z = 6
+val y: Z = 6
+val z: Z = 4
+
+assert (x == y & y > z)
+
+
+import org.sireum.logika._
+
+val x: Z = 6
+val y: Z = 6
+val z: Z = 4
+
+l"""{
+    1. x == 6           premise
+    2. y == 6           premise
+    3. z == 4           premise
+
+    //how to say that x and y are equal, and that y is bigger than z?
+}"""
+
+assert (x == y & y > z)
