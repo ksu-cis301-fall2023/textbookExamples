@@ -1,0 +1,42 @@
+import org.sireum.logika._
+
+//global variables
+var balance: Z = 0
+var elite: B = false
+val eliteMin: Z = 1000000 //$1M is the minimum balance for elite status
+
+//global invariants
+l"""{
+    invariant
+        //balance should be non-negative
+        balance >= 0
+
+        //elite status should reflect if balance is at least a million
+        elite == (balance >= eliteMin)
+}"""
+
+def deposit(amount: Z): Unit = {
+    l"""{
+        //We still need to complete the function contract
+    }"""
+
+    balance = balance + amount
+    if (balance >= eliteMin) {
+        elite = true
+    } else {
+        elite = false
+    }
+}
+
+def withdraw(amount: Z): Unit = {
+    l"""{
+        //We still need to complete the function contract
+    }"""
+
+    balance = balance - amount
+    if (balance >= eliteMin) {
+        elite = true
+    } else {
+        elite = false
+    }
+}
