@@ -1,0 +1,18 @@
+//Suppose we want to test mult as follows:
+
+val times: Z = mult(4, 2)
+
+assert(times == 8)
+
+l"""{
+    1. 2 >= 0               algebra     //proves the precondition
+}"""
+
+val times: Z = mult(4, 2)
+
+l"""{
+    1. times == 4*2         premise     //mult postcondition
+    2. times == 8           algebra 1   //needed for the assert
+}"""
+
+assert(times == 8)
