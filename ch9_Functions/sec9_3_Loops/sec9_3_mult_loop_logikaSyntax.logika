@@ -1,0 +1,39 @@
+//Suppose we have the following loop to multiply two numbers, x and y, using repeated addition. 
+//(This is very similar to our mult function from section 9.2, except it does the additions using a loop instead of using recursion):
+
+import org.sireum.logika._
+
+val x: Z = readInt()
+val y: Z = readInt()
+
+var sum: Z = 0
+var count: Z = 0
+
+while (count != y) {
+    sum = sum + x
+    count = count + 1
+}
+
+
+import org.sireum.logika._
+
+val x: Z = readInt()
+val y: Z = readInt()
+
+var sum: Z = 0
+var count: Z = 0
+
+while (count != y) {
+    //loop invariant block (still needs to be proved)
+    l"""{
+        invariant sum == count*x
+        modifies sum, count
+    }"""
+
+    sum = sum + x
+    count = count + 1
+}
+
+//now sum is x*y
+
+//now sum is x*y
