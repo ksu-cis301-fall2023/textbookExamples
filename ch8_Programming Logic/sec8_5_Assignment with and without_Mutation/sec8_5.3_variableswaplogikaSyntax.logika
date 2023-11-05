@@ -1,0 +1,51 @@
+//Suppose we have the following Logika program:
+
+import org.sireum.logika._
+
+var x: Z = readInt()
+var y: Z = readInt()
+
+val temp: Z = x
+x = y
+y = temp
+
+//what do we want to assert we did?
+
+import org.sireum.logika._
+
+var x: Z = readInt()
+var y: Z = readInt()
+
+//the original values of both inputs
+val xOrig: Z = x
+val yOrig: Z = y
+
+l"""{
+    1. xOrig == x           premise
+    2. yOrig == y           premise
+}"""
+
+//swap x and y
+val temp: Z = x
+x = y
+l"""{
+    1. x == y                   premise     //from the assignment statement
+    2. temp == x_old            premise     //temp equaled the OLD value of x
+    3. xOrig == x_old           premise     //xOrig equaled the OLD value of x
+    4. yOrig == y               premise     //yOrig still equals y
+    5. temp == xOrig            algebra 2 3
+    6. x == yOrig               algebra 1 4
+}"""
+y = temp
+l"""{
+    1. y == temp                premise     //from the assignment statemnet
+    2. temp == xOrig            premise     //from the previous logic block (temp and xOrig are unchanged since then)
+    3. yOrig == y_old           premise     //yOrig equaled the OLD value of y
+    4. y == xOrig               algebra 1 2
+    5. x == yOrig               premise     //from the previous logic block (x and yOrig are unchanged since then)
+    6. x == yOrig ^ y == xOrig  ^i 5 4
+}"""
+
+//x and y have swapped
+//x has y's original value, and y has x's original value
+assert(x == yOrig & y == xOrig)     //this assert will hold now
