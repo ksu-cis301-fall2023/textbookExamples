@@ -1,0 +1,36 @@
+//For example, suppose we want to verify the following program so the assert statement at the end will hold:
+
+import org.sireum.logika._
+
+val x: Z = 4
+
+val y: Z = x + 2
+
+val z: Z = 10 - x
+
+//the assert will not hold yet
+assert(y == z & y == 6)
+//Since none of the statements involve variable mutation, we can do the verification in a single logic block:
+
+import org.sireum.logika._
+
+val x: Z = 4    
+
+val y: Z = x + 2
+
+val z: Z = 10 - x
+
+l"""{
+    1. x == 4               premise     //assignment of unchanged variable
+    2. y == x + 2           premise     //assignment of unchanged variable
+    3. z == 10 - x          premise     //assignment of unchanged variable
+    4. y == 4 + 2           subst1 1 2
+    5. z == 10 - 4          subst1 1 3
+    6. y == 6               algebra 4
+    7. z == 6               algebra 5
+    8. y == z               subst2 7 6
+    9. y == z ∧ y == 6      ∧i 8 6
+}"""
+
+//now the assert will hold
+assert(y == z & y == 6)
