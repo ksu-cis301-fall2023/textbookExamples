@@ -1,0 +1,47 @@
+import org.sireum.logika._
+
+//What is this Logika fact saying?
+
+//add all elements from position 0 up to but not including pos
+//sum(seq, seq.size) - defines adding ALL elements in seq
+
+l"""{
+   fact
+       def sum(seq: ZS, pos: Z): Z
+           = 0, if pos == 0                                    (sum0)
+           = seq(pos-1) + sum(seq, pos-1), if pos > 0          (sumN)
+}"""
+
+def seqSum(list: ZS): Z = {
+   l"""{
+       ensures
+           result == sum(list, list.size)
+   }"""
+
+   var i: Z = 0
+   var total: Z = 0
+
+   while (i < list.size) {
+       l"""{
+           invariant
+               //total is the sum of the first i elements
+               //total = list(0) + list(1) + ... + list(i-1)
+               total == sum(list, i)
+               i >= 0
+               i <= list.size
+           modifies total, i
+       }"""
+
+       total = total + list(i)
+       i = i + 1
+   }
+
+   return total
+}
+
+////////////// Calling code ///////////////////
+
+var test: ZS = ZS(1,2,3,4)
+var added: Z = seqSum(test)
+
+assert(added == 10)
