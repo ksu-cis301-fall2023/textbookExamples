@@ -1,0 +1,53 @@
+import org.sireum.logika._
+
+def mult(x: Z, y: Z): Z = {
+    //verification complete!
+
+    l"""{
+        requires y >= 0
+        ensures result == x*y
+    }"""
+
+    var ans: Z = 0
+
+    if (y > 0) {
+        l"""{
+            1. y > 0                premise     //IF condition is true
+            2. y-1 >= 0             algebra 1   //Proves the precondition for the recursive call
+        }"""
+
+        var addRest: Z = mult(x, y-1)
+
+        l"""{
+            1. addRest == x*(y-1)   premise     //Postcondition from the recursive call
+            2. addRest == x*y - x   algebra 2
+        }"""
+
+        ans = x + addRest
+
+        l"""{
+            1. addRest == x*y - x   premise     //Pulled from previous block
+            2. ans == x + addRest   premise     //From the "ans = x + addRest" assignment statement
+            3. ans == x + x*y - x   algebra 1 2
+            4. ans == x*y           algebra 3   //Showed the postcondition for the IF branch
+        }"""
+    } else {
+        //do nothing in code - but we still do verification
+        //need to show that postcondition will be correct even if we take this branch
+
+        l"""{
+            1. ¬(y > 0)             premise     //if condition is false
+            2. y >= 0               premise     //precondition
+            3. y == 0               algebra 1 2
+            4. ans == 0             premise     //ans is unchanged
+            5. ans == x*y           algebra 3 4 //Showed the postcondition for the ELSE branch
+        }"""
+    }
+
+    //Tie together what we learned in both branches
+    l"""{
+        1. ans == x*y               premise     //shows the postcondition      
+    }"""
+
+    return ans
+}
