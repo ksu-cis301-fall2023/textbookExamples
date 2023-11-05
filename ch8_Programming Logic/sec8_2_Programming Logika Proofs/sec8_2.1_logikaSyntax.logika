@@ -1,0 +1,8 @@
+//Example 1: User input, printing, operations
+//This first example gets a number as input from the user, adds one to it, and prints the result:
+
+import org.sireum.logika._
+
+var x: Z = readInt("Enter a number: ")
+x = x + 1
+println("One more is ", x)
