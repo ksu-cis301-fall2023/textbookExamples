@@ -1,0 +1,23 @@
+//Example 4: Sequences and functions
+//Our final sample Logika program demonstrates sequences (Logika’s version of an array or list) and functions. It contains a function, sumSequence, which takes a sequence of integers as a parameter and returns the sum of the numbers in the sequence. At the bottom, we can see our test code that creates a sample sequence and tries calling sumSequence. As in our third example, this code cannot be run without some verification work:
+
+import org.sireum.logika._
+
+def sumSequence(seq: ZS) : Z = {
+    var sum: Z = 0
+
+    var i: Z = 0
+
+    while (i < seq.size) {
+        sum = sum + seq(i)
+        i = i + 1
+    }
+
+    return sum
+}
+
+////// Calling code ////////////
+
+val list: ZS = ZS(1,2,3,4)
+val total: Z = sumSequence(list)
+println("Sum of elements:", total)
