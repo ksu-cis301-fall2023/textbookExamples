@@ -1,0 +1,47 @@
+import org.sireum.logika._
+
+val x: Z = readInt()
+val y: Z = readInt()
+
+var sum: Z = 0
+var count: Z = 0
+
+//prove the invariant before the loop begins
+l"""{
+    1. sum == 0             premise     //from the "sum = 0" assignment
+    2. count == 0           premise     //from the "count = 0" assignment
+    3. sum == count*x       algebra 1 2 //proved EXACTLY the loop invariant
+}"""
+
+while (count != y) {
+    l"""{
+        invariant sum == count*x
+        modifies sum, count
+    }"""
+
+    l"""{
+        1. sum == count*x           premise     //the loop invariant holds 
+                                                //at the beginning of an iteration
+    }"""
+
+    sum = sum + x
+
+    l"""{
+        1. sum == sum_old + x           premise     //from "sum = sum + x" assignment
+        2. sum_old == count*x           premise     //loop invariant WAS true, but sum just changed
+        3. sum == count*x + x           algebra 1 2 //current knowledge without using _old
+    }"""
+
+    count = count + 1
+
+    l"""{
+        1. count == count_old + 1       premise     //from "count = count + 1" assignment
+        2. sum == count_old*x + x       premise     //from previous "sum = count*x + x", 
+                                                    //but count has changed
+        3. sum == (count-1)*x + x       algebra 1 2
+        4. sum == count*x - x + x       algebra 3
+        5. sum == count*x               algebra 4   //loop invariant holds at end of iteration
+    }"""
+}
+
+//now sum is x*y
