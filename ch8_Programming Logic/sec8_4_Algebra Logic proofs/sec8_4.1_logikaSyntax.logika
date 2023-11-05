@@ -1,0 +1,49 @@
+//Consider this example:
+
+import org.sireum.logika._
+
+var x: Z = 6
+var y: Z = x
+
+//this assert will not hold yet assert (y == 6)
+//Following our process from above, we add logic blocks after each program statement. In these logic blocks, we start by listing the previous program statement as a premise:
+
+import org.sireum.logika._
+
+var x: Z = 6
+
+l"""{
+    1. x == 6               premise
+}"""
+
+var y: Z = x
+
+l"""{
+    1. y == x               premise
+
+    //need claim "y == 6" for our assert to hold
+}"""
+
+//this assert will not hold yet
+assert (y == 6)
+
+//Here is the program with the second logic block completed – the assert statement will now hold.
+
+import org.sireum.logika._
+
+var x: Z = 6
+
+l"""{
+    1. x == 6               premise
+}"""
+
+var y: Z = x
+
+l"""{
+    1. y == x               premise
+    2. x == 6               premise     //established in a previous logic block, and x is unchanged since then
+    3. y == 6               algebra 1 2 //we know y is 6 using the claims from lines 1 and 2
+}"""
+
+//this assert will hold
+assert (y == 6)
