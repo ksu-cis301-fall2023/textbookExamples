@@ -1,0 +1,53 @@
+//Suppose we have the following swap program:
+
+import org.sireum.logika._
+
+def swap(list: ZS, pos1: Z, pos2: Z): Unit = {
+    var temp: Z = list(pos1)
+    list(pos1) = list(pos2)
+    list(pos2) = temp
+}
+
+///////////// Calling code ///////////////////
+
+var testList: ZS = ZS(1,2,3,4)
+swap(testList,0,3)
+
+//the values in positions 0 and 3 should be swapped
+//all other elements should be the same
+assert(testList == ZS(4,2,3,1))
+
+
+
+import org.sireum.logika._
+
+def swap(list: ZS, pos1: Z, pos2: Z): Unit = {
+    l"""{
+        //pos1 and pos2 need to be valid positions
+        requires pos1 >= 0
+            pos2 >= 0
+            pos1 < list.size
+            pos2 < list.size
+        modifies list
+        ensures
+            list(pos1) == list_in(pos2)
+            list(pos2) == list_in(pos1)
+            list.size == list_in.size
+
+            //all the other spots stay the same
+            A x:(0..<list.size) (x != pos1 ^ x != pos2) -> list(x) == list_in(x)
+    }"""
+
+    var temp: Z = list(pos1)
+    list(pos1) = list(pos2)
+    list(pos2) = temp
+}
+
+///////////// Calling code ///////////////////
+
+var testList: ZS = ZS(1,2,3,4)
+swap(testList,0,3)
+
+//the values in positions 0 and 3 should be swapped
+//all other elements should be the same
+assert(testList == ZS(4,2,3,1))
