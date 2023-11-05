@@ -1,0 +1,138 @@
+import org.sireum.logika._
+
+l"""{
+    fact
+        def factDef(n: Z): Z
+            fOne. factDef(1) == 1
+            fBig.  ∀x: Z  x > 1 → factDef(x) == factDef(x - 1) * x
+}"""
+
+def factorial(n: Z): Z = {
+    l"""{
+        requires n >= 1
+        ensures result == factDef(n)
+    }"""
+
+    var i: Z = 1 //how many multiplications we have done
+    var product: Z = 1  //my current calculation
+
+    //Prove invariant before loop begins
+    l"""{
+        1. i == 1                       premise
+        2. product == 1                 premise
+
+        //pull in first Logika fact rule
+        3. factDef(1) == 1              fact fOne     
+
+        //proves first loop invariant holds  
+        4. product == factDef(i)        algebra 1 2 3   
+
+        //proves second loop invariant holds
+        5. i >= 1                       algebra 1       
+    }"""
+
+    while (i != n) {
+        l"""{
+            invariant product == factDef(i)
+                i >= 1
+            modifies i, product
+        }"""
+
+        i = i + 1
+
+        l"""{
+            //from "i = i + 1"
+            1. i == i_old + 1               premise     
+
+            //loop invariant held before changing i
+            2. product == factDef(i_old)    premise     
+
+            //rewrite invariant with no "_old"
+            3. product == factDef(i-1)      algebra 1 2 
+
+            //second loop invariant held before changing i
+            4. i_old >= 1                   premise     
+
+            //needed for the Logika fact
+            5. i > 1                        algebra 1 4 
+        }"""
+
+        product = product * i
+
+        //Prove invariant still holds at end of iteration
+        l"""{
+            //from "product = product * i"
+            1. product == product_old*i                         premise 
+
+            //from previous logic block
+            2. product_old == factDef(i-1)                      premise 
+
+            //pull in Logika fact
+            3. ∀x: Z  x > 1 → factDef(x) == factDef(x - 1) * x  fact fBig
+
+            //plug in "i" for "x"
+            4. i > 1 → factDef(i) == factDef(i - 1) * i         Ae 3 i
+
+            //from previous logic block
+            5. i > 1                                            premise   
+
+            //i > 1, so get right side of →
+            6. factDef(i) == factDef(i - 1) * i                 →e 4 5     
+            7. product == factDef(i-1)*i                        algebra 1 2
+
+            //proves first invariant still holds
+            8. product == factDef(i)                            algebra 6 7 
+
+            //proves first invariant still holds
+            9. i >= 1                                           algebra 5
+        }"""
+    }
+
+    //Prove postcondition
+    l"""{
+        1. product == factDef(i)        premise //loop invariant
+        2. !(i != n)                    premise //loop condition false
+        3. i == n                       algebra 2
+        4. product == factDef(n)        algebra 1 3
+    }"""
+
+    return product
+}
+
+//////// Test code ///////////
+
+var num: Z = 2
+
+//Prove precondition
+l"""{
+    1. num == 2             premise
+    2. num >= 1             algebra 1   //proves factorial precondition
+}"""
+
+var answer: Z = factorial(num)
+
+l"""{
+    1. answer == factDef(num)           premise     //factorial postcondition
+    2. num == 2                         premise
+    3. answer == factDef(2)             algebra 1 2
+
+    //pull in Logika fact
+    4. ∀x: Z  x > 1 → factDef(x) == factDef(x - 1) * x  fact fBig
+
+    //plug in "2" for "x"
+    5. 2 > 1 → factDef(2) == factDef(2 - 1) * 2         Ae 4 2 
+    6. 2 > 1                            algebra
+
+    //2 > 1, so use →
+    7. factDef(2) == factDef(2 - 1) * 2  →e 5 6  
+
+    //pull in Logika fact
+    8. factDef(1) == 1                  fact fOne       
+    9. factDef(2) == factDef(1) * 2     algebra 7
+    10. factDef(2) == 2                 algebra 8 9
+
+    //proves claim in assert
+    11. answer == 2                     algebra 1 2 10
+}"""
+
+assert(answer == 2)
