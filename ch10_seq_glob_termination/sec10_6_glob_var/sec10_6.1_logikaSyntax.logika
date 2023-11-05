@@ -1,0 +1,28 @@
+import org.sireum.logika._
+
+//global variable
+var feetPerMile: Z = 5280  // feet in a mile mile
+
+def convertToFeet(m : Z): Z = {
+    l"""{
+        //only do conversions on nonnegative distances
+        requires m >= 0    
+            //not needed, but demonstrates using global variables in preconditions     
+            feetPerMile > 5200  
+
+        //can use global variable in postcondition    
+        ensures result == m * feetPerMile
+    }"""
+
+    val feet: Z = m * feetPerMile
+    return feet
+}
+
+/////////// Calling code ////////////////////
+
+var miles: Z = readInt()
+
+var totalFeet: Z = 0
+if (miles >= 0){
+    totalFeet = convertToFeet(miles)
+}
