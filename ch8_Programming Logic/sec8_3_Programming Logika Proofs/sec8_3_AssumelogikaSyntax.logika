@@ -1,0 +1,30 @@
+//For example:
+
+var a: Z = readInt()
+assume (a > 0)
+
+l"""{
+    1. a > 0            premise
+}"""
+
+
+import org.sireum.logika._
+
+var a : Z = readInt()
+assume (a != 0)
+
+l"""{
+    1. a != 0  premise
+}"""
+
+var b: Z = 20 / a
+//...is equivalent to:
+
+import org.sireum.logika._
+
+var a : Z = readInt()
+var b : Z = 0
+
+if (a != 0) {
+    b = 20 / a
+}
