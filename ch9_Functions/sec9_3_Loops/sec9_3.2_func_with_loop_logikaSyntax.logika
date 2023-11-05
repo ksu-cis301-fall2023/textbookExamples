@@ -1,0 +1,80 @@
+import org.sireum.logika._
+
+def mult(x: Z, y: Z) : Z = {
+    //function contract
+    l"""{
+        requires y >= 0         //precondition: y should be nonnegative
+        ensures result == x*y   //postcondition (we promise to return x*y)
+    }"""
+
+    var sum: Z = 0
+    var count: Z = 0
+
+    //prove the invariant before the loop begins
+    l"""{
+        1. sum == 0             premise     //from the "sum = 0" assignment
+        2. count == 0           premise     //from the "count = 0" assignment
+        3. sum == count*x       algebra 1 2 //proves EXACTLY the loop invariant
+    }"""
+
+    while (count != y) {
+        l"""{
+            invariant sum == count*x
+            modifies sum, count
+        }"""
+
+        l"""{
+            1. sum == count*x           premise     //the loop invariant holds 
+                                                    //at the beginning of an iteration
+        }"""
+
+        sum = sum + x
+
+        l"""{
+            1. sum == sum_old + x           premise     //from "sum = sum + x" assignment
+            2. sum_old == count*x           premise     //loop invariant WAS true, but sum just changed
+            3. sum == count*x + x           algebra 1 2 //current knowledge without using _old
+        }"""
+
+        count = count + 1
+
+        l"""{
+            1. count == count_old + 1       premise     //from "count = count + 1" assignment
+            2. sum == count_old*x + x       premise     //from previous "sum = count*x + x", 
+                                                        //but count has changed
+            3. sum == (count-1)*x + x       algebra 1 2
+            4. sum == count*x - x + x       algebra 3
+            5. sum == count*x               algebra 4   //proves loop invariant holds at end of iteration
+        }"""
+    }
+
+    l"""{
+        1. ¬(count != y)                    premise     //loop condition is now false
+        2. sum == count*x                   premise     //loop invariant holds after loop
+        3. count == y                       algebra 1
+        4. sum == x*y                       algebra 2 3 //proves the postcondition
+    }"""
+
+    return sum
+}
+
+//////////// Test code //////////////
+
+var one: Z = 3
+var two: Z = 4
+
+l"""{
+    1. two == 4             premise     //from the "two = 4" assignment
+    2. two >= 0             algebra 1   //proves the mult precondition
+}"""
+
+var answer: Z = mult(one, two)
+
+l"""{
+    1. one == 3             premise
+    2. two == 4             premise
+    3. answer == one*two    premise         //from the mult postcondition
+    4. answer == 12         algebra 1 2 3   //proves the assert
+}"""
+
+assert(answer == 12)
