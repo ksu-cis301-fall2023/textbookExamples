@@ -1,0 +1,49 @@
+For example, if we have the following program:
+
+import org.sireum.logika._
+
+var x: Z = 4
+
+x = x + 1
+
+//this assert will not hold yet assert(x == 5)
+//Then we might try to add the following logic blocks:
+
+import org.sireum.logika._
+
+var x: Z = 4
+
+l"""{
+    1. x == 4               premise     //from previous variable assignment
+}"""
+
+x = x + 1
+
+l"""{
+    1. x == x + 1           premise     //NO! Need to distinguish between old x (right side) and new x (left side)
+    2. x == 4               premise     //NO! x has changed since this claim
+
+}"""
+
+//this assert will not hold yet
+assert(x == 5)
+
+import org.sireum.logika._
+
+var x: Z = 4
+
+l"""{
+    1. x == 4               premise     //from previous variable assignment
+}"""
+
+x = x + 1
+
+l"""{
+    1. x == x_old + 1       premise     //Yes! x equals its old value plus 1
+    2. x_old == 4           premise     //Yes! The old value of x was 4
+    3. x == 4 + 1           subst1 2 1  
+    4. x == 5               algebra 3   //Could have skipped line 3 and used "algebra 1 2" instead
+}"""
+
+//now the assert will hold
+assert(x == 5)
