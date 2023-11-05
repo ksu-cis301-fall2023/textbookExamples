@@ -1,0 +1,51 @@
+For example, suppose we have a program that finds the absolute value of an input number:
+
+import org.sireum.logika._
+
+var num: Z = readInt()
+var orig: Z = num
+
+if (num < 0) {
+    num = num * -1
+}
+
+//num is now the absolute value of the original input
+
+import org.sireum.logika._
+
+var num: Z = readInt()
+val orig: Z = num
+
+l"""{
+    1. orig == num                  premise         //from "orig = num" assignment
+    2. num == orig                  algebra 1       //switch order to match assert
+}"""
+
+if (num < 0) {
+    num = num * -1
+
+    l"""{
+        1. num_old < 0              premise         //if condition (num just changed)
+        2. num == num_old * -1      premise         //from "num = num * -1" assignment
+        3. orig == num_old          premise         //orig did equal num (num just changed)
+        4. num >= 0                 algebra 1 2     //a negative number times -1 is nonnegative
+        5. num == -1*orig           algebra 2 3     //needed for last part of assert
+    }"""
+}
+
+l"""{
+    1. num >= 0 ∨ ¬(num < 0)            premise     //conclusion from if OR !(condition)
+    2. num == -1*orig ∨ num == orig     premise     //conclusion from if OR num still equals orig
+    3. {
+        4. num >= 0                     assume
+    }
+    5. {
+        6. ¬(num < 0)                   assume
+        7. num >= 0                     algebra 6
+    }
+    8. num >= 0                         ∨e 1 3 5
+    9. num >= 0 ∧ (num == -1*orig ∨ num == orig)    ∧i 8 2  //match assert
+}"""
+
+//num is now nonnegative
+assert(num >= 0 & (num == -1*orig | num == orig))
