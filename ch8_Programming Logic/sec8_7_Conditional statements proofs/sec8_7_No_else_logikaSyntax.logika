@@ -34,17 +34,17 @@ if (num < 0) {
 }
 
 l"""{
-    1. num >= 0 ∨ ¬(num < 0)            premise     //conclusion from if OR !(condition)
-    2. num == -1*orig ∨ num == orig     premise     //conclusion from if OR num still equals orig
+    1. num >= 0 V !(num < 0)            premise     //conclusion from if OR !(condition)
+    2. num == -1*orig V num == orig     premise     //conclusion from if OR num still equals orig
     3. {
         4. num >= 0                     assume
     }
     5. {
-        6. ¬(num < 0)                   assume
+        6. !(num < 0)                   assume
         7. num >= 0                     algebra 6
     }
-    8. num >= 0                         ∨e 1 3 5
-    9. num >= 0 ∧ (num == -1*orig ∨ num == orig)    ∧i 8 2  //match assert
+    8. num >= 0                         Ve 1 3 5
+    9. num >= 0 ^ (num == -1*orig ∨ num == orig)    ^i 8 2  //match assert
 }"""
 
 //num is now nonnegative
