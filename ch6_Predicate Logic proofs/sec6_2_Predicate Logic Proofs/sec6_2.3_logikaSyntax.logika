@@ -1,9 +1,9 @@
 //Suppose we wish to prove the following (in the domain of living things):
 
 //All bunnies are fluffy
-There is a fast bunny
-Therefore, there is a creature that is fast and fluffy
-We can translate our premises and desired conclusion to predicate logic, and write the following sequent://
+//There is a fast bunny
+//Therefore, there is a creature that is fast and fluffy
+//We can translate our premises and desired conclusion to predicate logic, and write the following sequent://
 
 //∀ x (Bunny(x) → Fluffy(x)), ∃ x (Fast(x) ∧ Bunny(x)) ⊢ ∃ x (Fast(x) ∧ Fluffy(x))
 
