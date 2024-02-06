@@ -1,0 +1,8 @@
+(p, q, r) ⊢ r & (q & p)
+{
+    1. p               Premise
+    2. q               Premise
+    3. r               Premise
+    4. q & p           &i(2, 1)
+    5. r & (q & p)     AndI(3, 4)
+}
