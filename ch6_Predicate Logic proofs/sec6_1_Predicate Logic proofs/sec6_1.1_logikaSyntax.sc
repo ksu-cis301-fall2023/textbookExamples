@@ -16,7 +16,6 @@ import org.sireum.justification.natded.prop._
         3  (P(a))                         by AllE[T](1)
       )},
       4  (∀{ (y: T) => P(y) })            by AllI[T](2)
-
     )
   //@formatter:on
   )
