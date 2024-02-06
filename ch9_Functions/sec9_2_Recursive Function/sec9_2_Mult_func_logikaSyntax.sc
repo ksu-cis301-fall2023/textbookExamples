@@ -24,18 +24,29 @@ import org.sireum.justification._
     Deduce(
       //@formatter:off
       1  (addRest == x * (y - 1)) by Premise,
-      2  (addRest == x * y - x) by Algebra*(2)
+      2  (addRest == x * y - x) by Algebra*(1)
       //@formatter:on
     )
-    ans = x + addRest
+
+     ans = x
+
+       Deduce(
+            //@formatter:off
+            1 (ans == x)           by Premise
+            //@formatter:on
+       )
+
+    ans = ans + addRest
     Deduce(
       //@formatter:off
       1  (addRest == x * y - x) by Premise,
-      2  (ans == x + addRest) by Premise,
-      3  (ans == x + x * y - x) by Algebra*(1, 2),
-      4  (ans == x * y) by Algebra*(3)
+      2  (ans == Old(ans) + addRest) by Premise,
+      3  (Old(ans) == x)              by Premise,
+      4  (ans == x + x * y - x) by Algebra*(1, 2, 3),
+      5  (ans == x * y) by Algebra*(4)
       //@formatter:on
     )
+
   } else {
     Deduce(
       //@formatter:off

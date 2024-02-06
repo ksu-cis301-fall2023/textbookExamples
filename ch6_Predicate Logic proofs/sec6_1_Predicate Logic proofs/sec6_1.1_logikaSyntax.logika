@@ -5,11 +5,13 @@
 ∀ x P(x) ⊢ ∀ y P(y)
 {
     1. ∀ x P(x)         premise
-    2. {
-        3. a            //our fresh individual
-        4. P(a)         ∀e 1 a
+    2 {
+        3. x            //our fresh individual
+        4. P(a)         AllE(1)
         //need: P(a)
     }
     //want to use ∀i to conclude ∀ y P(y)
-    5. ∀ y P(y)         ∀i 2
+    5. ∀ z P(y)         AllI(1)
 }
+
+//Note: Will say Logika verified for everything...need to use .sc files
