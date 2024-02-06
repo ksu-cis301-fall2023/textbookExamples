@@ -1,5 +1,5 @@
 // #Sireum #Logika
-//@Logika: --manual --background type
+//@Logika: --manual --background save
 import org.sireum._
 import org.sireum.justification._
 import org.sireum.justification.natded.pred._
