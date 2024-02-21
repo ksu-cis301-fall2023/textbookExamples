@@ -9,7 +9,7 @@ import org.sireum.justification.natded.prop._
 @pure def sequent[T](P: T => B @pure): Unit = {
   Deduce(
     //@formatter: off
-    ∀{ (x: T) => P(x) }  ⊢  (∀{ (y: T) => P(y) })
+    All{ (x: T) => P(x) }  ⊢  (All{ (y: T) => P(y) })
     Proof(
       1  (∀{ (x: T) => P(x) })            by Premise,
       2  Let { (a: T) => SubProof(
