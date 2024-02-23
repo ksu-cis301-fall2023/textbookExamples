@@ -1,27 +1,14 @@
-For each chapter in https://textbooks.cs.ksu.edu/cis301/:
+To start a new repo:
 
-- If the current chapter contains at least one Logika proof/truth table (the first such chapter is Ch. 2):
-    - create a folder for the chapter in this repo. Name the folder with the chapter number
-        and name (or abbreviation). For example: "ch2_truthTables".
+- use command line to clone
 
-- Identify which sections in that chapter contain Logika proofs/truth tables (they tend to be multiple lines
-    in a black box). The earliest section with Logika proofs (in this case, a truth table) is 2.2.
+- in the command line, go to the location of sireum.bat (for me it is in C:\Users\juliet\Sireum\bin)
 
-- Create a subfolder for that section within the chapter folder. For example, "sec2_2_truthTablesLogika"
-    should be a subfolder of "ch2_truthTables"
+- from the command line, run proyek:
+    sireum.bat proyek ive "repo location as a string"
 
 
-
-Then, for each Logika proof in the textbook:
-
-- create a new file in the corresponding subfolder. It should have the extension ".logika", and should
-    be named with a combination of the section number and the most recent header in the textbook. For example,
-    the first proof https://textbooks.cs.ksu.edu/cis301/2-chapter/2_2-logikatruth/index.html should be:
-        sec2_2_logikaSyntax.logika
-
-- if the same proof/truth table in the textbook is developed in stages until it is finally completed,
-    only create a .logika file for the completed version. You'll know it's the complete version because it
-    will say "Logika verified".
-
-
-(Later, I will include instructions on translating the examples to the new Logika format.)
+To get nice implies for proofs in IntelliJ:
+    File->Settings->Editor->Font
+    change font to Sireum Mono Plus
+    Check "Enable Ligatures"
