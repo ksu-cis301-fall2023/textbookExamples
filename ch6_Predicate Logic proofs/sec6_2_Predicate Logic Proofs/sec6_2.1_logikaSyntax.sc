@@ -11,8 +11,7 @@ import org.sireum.justification.natded.pred._
            2 SubProof { (bob: T) => (
               3 Assume(  Human(bob)  ),
              
-           ),
-              4 (  CLAIM  ) by Premise},
+           )},
 
 
 
