@@ -38,6 +38,7 @@ import org.sireum.justification.natded.prop._
                     ),
                     22 ((!p __>: q) __>: q)                     by ImplyI(3),
                 ),
+                24 Assume(  CLAIM  ),
             23 ((p __>: q) __>: ((!p __>: q) __>: q))                     by ImplyI(1)
         )
         //@formatter:on
