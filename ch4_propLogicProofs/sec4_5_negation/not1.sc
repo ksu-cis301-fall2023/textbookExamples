@@ -11,9 +11,9 @@ import org.sireum.justification.natded.prop._
           (q, !q) ⊢ (F)
 
                Proof(
-                    1 (q)               by Premise,
-                    2 (!q)              by Premise,
-                    3 (F)               by NegE(1, 2)
+                    1 (  q   ) by Premise,
+                    2 (  !q  ) by Premise,
+                    3 (  F   ) by NegE(1, 2)
                )
           //@formatter:on
      )

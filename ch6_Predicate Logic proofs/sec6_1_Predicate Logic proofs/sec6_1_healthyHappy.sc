@@ -28,22 +28,22 @@ original proof:
      Deduce(
           //@formatter: off
           (
-            ∀{(x: T) => isHealthy(x)},
-            ∀{(y: T) => isHappy(y)}
+            ∀((x: T) => isHealthy(x)),
+            ∀((y: T) => isHappy(y))
           )
           ⊢
             (
-              ∀{(z: T) => isHealthy(z) & isHappy(z)}
+              ∀((z: T) => isHealthy(z) & isHappy(z))
             )
           Proof (
-               1 (∀{(x: T) => isHealthy(x)})                by Premise,
-               2 (∀{(y: T) => isHappy(y)})                  by Premise,
-               3 Let {(a: T) => SubProof(
-                    4 (isHealthy(a))                          by AllE[T](1),
-                    5 (isHappy(a))                          by AllE[T](2),
-                    6 (isHealthy(a) & isHappy(a))           by AndI(4, 5)
-               )},
-               7 (∀{(z: T) => isHealthy(z) & isHappy(z)})   by AllI[T](3)
+               1 (  ∀((x: T) => isHealthy(x))               ) by Premise,
+               2 (  ∀((y: T) => isHappy(y))                 ) by Premise,
+               3 Let ((a: T) => SubProof(
+                    4 (  isHealthy(a)                       ) by AllE[T](1),
+                    5 (  isHappy(a)                         ) by AllE[T](2),
+                    6 (  isHealthy(a) & isHappy(a)          ) by AndI(4, 5)
+               )),
+               7 (  ∀((z: T) => isHealthy(z) & isHappy(z))  ) by AllI[T](3)
           )
           //@formatter: on
      )
