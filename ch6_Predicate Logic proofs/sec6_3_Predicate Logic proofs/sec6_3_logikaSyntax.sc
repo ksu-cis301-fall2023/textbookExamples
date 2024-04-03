@@ -2,6 +2,7 @@
 //@Logika: --manual --background save
 import org.sireum._
 import org.sireum.justification._
+import org.sireum.justification.natded.prop._
 import org.sireum.justification.natded.pred._
 
 // A x A y (P(x, y) -> Q(x, y)), A x A y P(x, y) |- A x A y Q(x, y)
@@ -25,11 +26,12 @@ import org.sireum.justification.natded.pred._
             5 (  ∀( (y: T) => (P(a, y) __>: Q(a, y)))            ) by AllE[T](1),
             6 (  P(a, b) __>: Q(a, b)                            ) by AllE[T](5),
             7 (  ∀( (y: T) => P(a, y))                        ) by AllE[T](2),
-            8 (  Q(a, b)                                      ) by AllE[T](7)
+            8 (  P(a, b)                                      ) by AllE[T](7),
+            9 (  Q(a, b)                                      ) by ImplyE(6, 8)
           )),
-          9 (  ∀((y: T) => Q(a, y))                           ) by AllI[T](4)
+          10 (  ∀((y: T) => Q(a, y))                          ) by AllI[T](4)
         )),
-      10 (  ∀((x: T) => ∀((y: T) => Q(x, y)))                 ) by AllI[T](3)
+      11 (  ∀((x: T) => ∀((y: T) => Q(x, y)))                 ) by AllI[T](3)
 
     //@formatter:on
   ))
