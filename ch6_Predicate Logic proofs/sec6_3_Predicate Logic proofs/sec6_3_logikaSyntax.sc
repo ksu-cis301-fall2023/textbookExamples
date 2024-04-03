@@ -4,22 +4,33 @@ import org.sireum._
 import org.sireum.justification._
 import org.sireum.justification.natded.pred._
 
-@pure def sequent[T](P: (T, T) => B @pure, bob: T): Unit = {
-  Deduce(∀((x: T) => ∀((y: T) => P(x, y)))  ⊢  ∀((x: T) => ∀((y: T) => P(y, x))) Proof(
-    //@formatter:off
-    1  (∀((x: T) => ∀((y: T) => P(x, y)))) by Premise,
+// A x A y (P(x, y) -> Q(x, y)), A x A y P(x, y) |- A x A y Q(x, y)
+@pure def sequent[T](P: (T, T) => B @pure, Q: (T, T) => B @pure): Unit = {
+  //@formatter:off
+    Deduce(
+    (
+      ∀((x: T) => ∀((y: T) => (P(x, y) __>: Q(x, y)))),
+      ∀((x: T) => ∀((y: T) => P(x, y)))
+    )
+    ⊢
+    (
+          ∀((x: T) => ∀((y: T) => Q(x, y)))
+      )
+      Proof(
+        1 (  ∀( (x: T) => ∀( (y: T) => (P(x, y) __>: Q(x, y))))  ) by Premise,
+        2 (  ∀( (x: T) => ∀( (y: T) => P(x, y)))              ) by Premise,
 
-    //line 20 is just to test the AllE[T] rule with nested quantifiers
-    20 ( ∀((y: T) => P(bob, y)))  by AllE[T](1),
+        3 Let ( (a: T) => SubProof(
+          4 Let ( (b: T) => SubProof (
+            5 (  ∀( (y: T) => (P(a, y) __>: Q(a, y)))            ) by AllE[T](1),
+            6 (  P(a, b) __>: Q(a, b)                            ) by AllE[T](5),
+            7 (  ∀( (y: T) => (P(a, y)))                      ) by AllE[T](2),
+            8 (  P(a, b)                                      ) by AllE[T](2)
+          )),
+          9 (  ∀((y: T) => Q(a, y))                           ) by AllI[T](4)
+        )),
+      10 (  ∀((x: T) => ∀((y: T) => Q(x, y)))                 ) by AllI[T](3)
 
-    2 Let ( (a: T) => SubProof(
-      3 Let ( (b: T) => SubProof(
-        4 (   ∀((y: T) => P(b, y))  )   by AllE[T](1),
-        5 (   P(b, a)               )   by AllE[T](4)
-      )),
-      6 (   ∀((y: T) => P(y, a))    )  by AllI[T](3)
-    )),
-    7 (   ∀((x: T) => ∀((y: T) => P(y, x))) ) by AllI[T](2)
     //@formatter:on
   ))
 }
