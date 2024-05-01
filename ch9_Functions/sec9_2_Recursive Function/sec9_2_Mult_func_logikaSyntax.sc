@@ -1,5 +1,5 @@
 // #Sireum #Logika
-//@Logika: --background save
+//@Logika: --manual --background save
 import org.sireum._
 import org.sireum.justification._
 
@@ -20,30 +20,22 @@ import org.sireum.justification._
       2  (y - 1 >= 0) by Algebra*(1)
       //@formatter:on
     )
-    var addRest: Z = mult(x, y - 1)
+    ans = mult(x, y - 1)
     Deduce(
       //@formatter:off
-      1  (addRest == x * (y - 1)) by Premise,
-      2  (addRest == x * y - x) by Algebra*(1)
+      1  (ans == x * (y - 1)) by Premise,
+      2  (ans == x * y - x) by Algebra*(1)
       //@formatter:on
     )
 
-     ans = x
 
-       Deduce(
-            //@formatter:off
-            1 (ans == x)           by Premise
-            //@formatter:on
-       )
-
-    ans = ans + addRest
+    ans = ans + x
     Deduce(
       //@formatter:off
-      1  (addRest == x * y - x) by Premise,
-      2  (ans == Old(ans) + addRest) by Premise,
-      3  (Old(ans) == x)              by Premise,
-      4  (ans == x + x * y - x) by Algebra*(1, 2, 3),
-      5  (ans == x * y) by Algebra*(4)
+      1  (Old(ans) == x * y - x) by Premise,
+      2  (ans == Old(ans) + x) by Premise,
+      3  (ans == x + x * y - x) by Algebra*(1, 2),
+      4  (ans == x * y) by Algebra*(3)
       //@formatter:on
     )
 
@@ -65,3 +57,18 @@ import org.sireum.justification._
   )
   return ans
 }
+
+//Suppose we want to test mult as follows:
+
+Deduce(
+    1 ( 2 >= 0 )             by Algebra*()     //proves the precondition
+)
+
+val times: Z = mult(4, 2)
+
+Deduce(
+    1 ( times == 4*2 )         by Premise,     //mult postcondition
+    2 ( times == 8 )           by Algebra*(1)   //needed for the assert
+)
+
+assert(times == 8)

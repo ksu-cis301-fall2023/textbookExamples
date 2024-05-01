@@ -24,6 +24,8 @@ import org.sireum.justification.natded.prop._
   )
   return answer
 }
+
+
 var x: Z = 5
 Deduce(
   //@formatter:off

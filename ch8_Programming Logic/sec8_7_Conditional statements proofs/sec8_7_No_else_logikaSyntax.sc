@@ -1,14 +1,9 @@
 // #Sireum #Logika
-//@Logika: --background save
+//@Logika: --manual --background save
 import org.sireum._
 import org.sireum.justification._
 import org.sireum.justification.natded.prop._
 
-var num: Z = Z.read()
-var orig: Z = num
-if (num < 0) {
-  num = num * -1
-}
 
 var num: Z = Z.read()
 val orig: Z = num
@@ -32,7 +27,7 @@ if (num < 0) {
 }
 Deduce(
   //@formatter:off
-  1  (num >= 0 | !(num < 0)) by Premise,
+  1  (!(num < 0) | num >= 0) by Premise,
   2  (num == -1 * orig | num == orig) by Premise,
   3  SubProof(
     4  Assume(num >= 0)

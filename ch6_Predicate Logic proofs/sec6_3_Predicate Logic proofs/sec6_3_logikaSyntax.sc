@@ -25,7 +25,7 @@ import org.sireum.justification.natded.pred._
           4 Let ( (b: T) => SubProof (
             5 (  ∀( (y: T) => (P(a, y) __>: Q(a, y)))            ) by AllE[T](1),
             6 (  P(a, b) __>: Q(a, b)                            ) by AllE[T](5),
-            7 (  ∀( (y: T) => P(a, y))                        ) by AllE[T](2),
+            7 (  ∀((y: T) => P(a, y))                         ) by AllE[T](2),
             8 (  P(a, b)                                      ) by AllE[T](7),
             9 (  Q(a, b)                                      ) by ImplyE(6, 8)
           )),

@@ -7,7 +7,7 @@ import org.sireum.justification.natded.pred._
 
 @pure def sequent[T](x: T, Adult: T => B @pure, Kid: T => B @pure): Unit = {
   Deduce((∃{ (x: T) => (Adult(x) | Kid(x)) })  ⊢  ((∃{ (x: T) => Adult(x) }) | (∃{ (x: T) => Kid(x) })) Proof(
-    //@formatter:off
+
     1 (  ∃{ (x: T) => (Adult(x) | Kid(x)) }                        ) by Premise,
     2  Let { (alice: T) => SubProof(
       3  Assume(  Adult(alice) | Kid(alice)  ),
@@ -24,6 +24,6 @@ import org.sireum.justification.natded.pred._
       12 (  (∃{ (x: T) => Adult(x) }) | (∃{ (x: T) => Kid(x) })    ) by OrE(3, 4, 8)
     )},
     13 (  (∃{ (x: T) => Adult(x) }) | (∃{ (x: T) => Kid(x) })      ) by ExistsE[T](1, 2)
-    //@formatter:on
+
   ))
 }

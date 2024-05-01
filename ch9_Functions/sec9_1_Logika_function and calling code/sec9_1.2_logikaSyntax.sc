@@ -1,5 +1,5 @@
 // #Sireum #Logika
-//@Logika: --background save
+//@Logika: --manual --background save
 import org.sireum._
 import org.sireum.justification._
 import org.sireum.justification.natded.prop._
@@ -80,7 +80,7 @@ Deduce(
   ),
   12  SubProof(
     13  Assume(biggest == 2),
-    14  (!(biggest >= 3)) by Algebra*(6, 13),
+    14  (!(biggest >= 3)) by Algebra*(13),
     15  (F) by NegE(6, 14),
     16  (biggest == 3) by BottomE(15)
   ),
