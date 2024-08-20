@@ -21,12 +21,3 @@ import org.sireum.justification.natded.pred._
     //@formatter:on
   ))
 }
-
-
-@pure def sequent[T](x: T, P: T => B @pure): Unit = {
-   Deduce((∀{ (x: T) => !P(x) }) ⊢ (!(∃{ (x: T) => P(x) })) Proof(
-      //@formatter:off
-      1 (∀{ (x: T) => !P(x) }) by Premise,
-      2 Let {}
-)
-}
