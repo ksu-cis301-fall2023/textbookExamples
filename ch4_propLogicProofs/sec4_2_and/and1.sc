@@ -20,4 +20,3 @@ import org.sireum.justification.natded.prop._
           //@formatter:on
      )
 }
-

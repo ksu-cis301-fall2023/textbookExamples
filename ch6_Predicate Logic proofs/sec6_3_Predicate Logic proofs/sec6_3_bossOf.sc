@@ -13,10 +13,10 @@ import org.sireum.justification.natded.pred._
   Proof(
 
     1 (   ∃((x: T) => ∀((y: T) => IsBossOf(x, y)))  )    by Premise,
-    2 Let ( (b: T) => SubProof(
+    2 Let ( (a: T) => SubProof(
       4 Assume( ∀((y: T) => IsBossOf(a, y))),
 
-      3 Let ( (a: T) => SubProof(
+      3 Let ( (b: T) => SubProof(
 
         5 ( IsBossOf(a, b)    )   by AllE[T](4),
         6 ( ∃((x: T) => IsBossOf(x, b)))  by ExistsI[T](5)
