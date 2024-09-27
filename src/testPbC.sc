@@ -5,7 +5,7 @@ import org.sireum._
 import org.sireum.justification._
 import org.sireum.justification.natded.prop._
 
-@pure def bad(p: B, q: B, r: B): Unit = {
+@pure def bad(p: B, q: B): Unit = {
   Deduce(
     //@formatter: off
 
