@@ -58,8 +58,7 @@ if (addVehicle == 1) {
       2 (numWheels == numBikes*2 + Old(numCars)*4) by Premise,
       3 (numWheels == numBikes*2 + numCars*4 - 4) by Algebra*(1, 2),
       4 (oldCars == Old(numCars)) by Premise,
-      5 (numCars == oldCars + 1) by Algebra*(4, 1),
-      // 6 (!(addVehicle == 1) & addVehicle == 2) by Premise
+      5 (numCars == oldCars + 1) by Algebra*(4, 1)
     )
 
     numWheels = numWheels + 4
